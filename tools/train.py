@@ -23,10 +23,12 @@ from mtr.models import model as model_utils
 
 from train_utils.train_utils import train_model
 
+from cfmp.models import model as cfm_model_utils
 
 def parse_config():
     parser = argparse.ArgumentParser(description='arg parser')
     parser.add_argument('--cfg_file', type=str, default=None, help='specify the config for training')
+    parser.add_argument('--cfm', action='store_true', default=False, help='Use CFM version')
 
     parser.add_argument('--batch_size', type=int, default=None, required=False, help='batch size for training')
     parser.add_argument('--epochs', type=int, default=None, required=False, help='number of epochs to train for')
@@ -165,7 +167,11 @@ def main():
         add_worker_init_fn=args.add_worker_init_fn,
     )
 
-    model = model_utils.MotionTransformer(config=cfg.MODEL)
+    if args.cfm: 
+        model = cfm_model_utils.CFMMotionTransformer(config=cfg.MODEL)
+    else:
+        model = model_utils.MotionTransformer(config=cfg.MODEL)
+    
     if not args.without_sync_bn:
         model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
     model.cuda()

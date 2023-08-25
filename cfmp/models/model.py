@@ -13,3 +13,5 @@ class CFMMotionTransformer(MotionTransformer):
             in_channels=self.context_encoder.num_out_channels,
             config=self.model_cfg.MOTION_DECODER
         )
+    
+    
