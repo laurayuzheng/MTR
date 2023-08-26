@@ -168,6 +168,7 @@ def main():
     )
 
     if args.cfm: 
+        print("Using CFM Motion Transformer")
         model = cfm_model_utils.CFMMotionTransformer(config=cfg.MODEL)
     else:
         model = model_utils.MotionTransformer(config=cfg.MODEL)

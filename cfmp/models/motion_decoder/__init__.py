@@ -1,5 +1,5 @@
 from mtr.models.motion_decoder.mtr_decoder import MTRDecoder
-from cfm_decoder import MTRCFMDecoder
+from .cfm_decoder import MTRCFMDecoder
 
 __all__ = {
     'MTRDecoder': MTRDecoder, 
